@@ -4,7 +4,7 @@ service: e-core-challenge-passoz
 frameworkVersion: '3'
 
 custom:
-  tableName: 'e-core-challenge-passoz-images-table-${sls:stage}'
+  tableName: 'e-core-challenge-passoz-images-${sls:stage}'
   
 provider:
   name: aws
