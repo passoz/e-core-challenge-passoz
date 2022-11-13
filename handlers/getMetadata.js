@@ -4,14 +4,14 @@ const serverless = require("serverless-http");
 
 const app = express();
 
-const USERS_TABLE = process.env.USERS_TABLE;
+const IMAGES_TABLE = process.env.IMAGES_TABLE;
 const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 
 app.use(express.json());
 
 app.get("/GetMetadata/:filename", async function (req, res) {
   const params = {
-    TableName: USERS_TABLE,
+    TableName: IMAGES_TABLE,
     Key: {
       id: 'image',
       filename: req.params.filename

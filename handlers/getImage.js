@@ -4,7 +4,7 @@ const serverless = require("serverless-http");
 
 const app = express();
 
-const USERS_TABLE = process.env.USERS_TABLE;
+const IMAGES_TABLE = process.env.IMAGES_TABLE;
 const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 
 app.use(express.json());
@@ -14,7 +14,7 @@ app.get("/GetImage/:filename", async function (req, res) {
   const s3 = new AWS.S3();
 
   const params = {
-    TableName: USERS_TABLE,
+    TableName: IMAGES_TABLE,
     Key: {
       id: 'image',
       filename: req.params.filename
@@ -25,7 +25,7 @@ app.get("/GetImage/:filename", async function (req, res) {
     const { Item } = await dynamoDbClient.get(params).promise();
 
     if (Item && req.params.filename) {
-      const { extension, arn } = Item;
+      const { extension, arn, filename } = Item;
 
       const image = await s3.getObject( {
         Bucket: arn.split('/')[0].split(':')[arn.split('/')[0].split(':').length - 1],
@@ -33,7 +33,7 @@ app.get("/GetImage/:filename", async function (req, res) {
       }).promise();
 
       res.set('Content-Type', 'image/' + extension)
-      res.status(200).sendFile(image);
+      res.status(200).send(image);
 
     } else {
       res
@@ -42,7 +42,7 @@ app.get("/GetImage/:filename", async function (req, res) {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Could not retreive user" });
+    res.status(500).json({ error: "Could not retreive image" });
   }
 });
 
