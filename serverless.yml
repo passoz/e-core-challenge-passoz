@@ -1,6 +1,6 @@
 org: passoz
-app: e-core-challenge
-service: e-core-challenge
+app: e-core-challenge-passoz
+service: e-core-challenge-passoz
 frameworkVersion: '3'
 
 custom:
