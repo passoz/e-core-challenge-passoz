@@ -1,7 +1,7 @@
 {
   "body": "{\"test\":\"body\"}",
   "resource": "/{proxy+}",
-  "path": "/path/to/resource",
+  "path": "/GetImage/laptop-1.jpg",
   "httpMethod": "GET",
   "queryStringParameters": {
     "foo": "bar"

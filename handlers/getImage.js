@@ -27,13 +27,18 @@ app.get("/GetImage/:filename", async function (req, res) {
     if (Item && req.params.filename) {
       const { extension, arn, filename } = Item;
 
-      const image = await s3.getObject( {
-        Bucket: arn.split('/')[0].split(':')[arn.split('/')[0].split(':').length - 1],
-        Key: filename,
-      }).promise();
+      const s3Params = {
+          Bucket: arn.split('/')[0].split(':')[arn.split('/')[0].split(':').length - 1],
+          Key: filename
+      }
 
-      res.set('Content-Type', 'image/' + extension)
-      res.status(200).send(image);
+      res.attachment(filename);
+
+      res.setHeader('Content-Type', 'image/' + extension)
+
+      const imageStream = await s3.getObject( s3Params ).createReadStream();
+
+      imageStream.pipe(res)
 
     } else {
       res
@@ -53,4 +58,17 @@ app.use((req, res, next) => {
 });
 
 
-module.exports.handler = serverless(app);
+module.exports.handler = serverless(
+  app,
+  {
+    binary: [
+      'image/jpeg',
+      'image/jpg',
+      'image/png',
+      'image/apng',
+      'image/webp',
+      'image/gif',
+      'image/avif'
+    ],
+  }
+);
