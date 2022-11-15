@@ -70,4 +70,4 @@ serverless deploy
 
 ## Documentação
 
-[Clique aqui e acesse a documentação](docs/index.html)
+[Clique aqui e acesse a documentação](https://passoz.github.io/e-core-challenge-passoz/)
