@@ -33,8 +33,7 @@ Agora precisamos clonar este repositório:
 git clone https://github.com/passoz/e-core-challenge-passoz.git
 ```
 
-Então entre no diretório, configure o arquivo serverless.yml, adicione 
-o projeto à sua conta no Serverless Framework e realize o deploy da aplicação:
+Entre no diretório:
 
 ```sh
 # clonando o repositório
@@ -49,11 +48,13 @@ Para:
 ```yaml
 org: <nome-do-seu-usuario-no-serverless>
 ```
-
+Instale as dependências:
 ```sh
 # instalando dependências
 npm install
-
+```
+Adicione o projeto à sua conta no Serverless Framework e realize o deploy da aplicação:
+```sh
 # faça o login com sua conta do serverless
 serverless login
 
