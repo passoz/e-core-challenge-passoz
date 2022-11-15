@@ -70,4 +70,4 @@ serverless deploy
 
 ## Documentação
 
-[Clique aqui e acesse a documentação](documentation/index.html)
+[Clique aqui e acesse a documentação](docs/index.html)
