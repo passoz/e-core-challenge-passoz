@@ -4,7 +4,7 @@ service: e-core-challenge-passoz
 frameworkVersion: '3'
 
 custom:
-  tableName: 'e-core-challenge-passoz-images-${sls:stage}'
+  tableName: 'e-core-challenge-passoz-images'
   
 provider:
   name: aws
@@ -27,40 +27,42 @@ provider:
             - dynamodb:Scan
             - dynamodb:GetItem
             - dynamodb:PutItem
-            - dynamodb:PartiQLSelect
           Resource:
             - Fn::GetAtt: [ ImagesTable, Arn ]
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+          Resource: 'arn:aws:dynamodb:us-east-1:*:table/${self:custom.tableName}/index/*'
         - Effect: Allow
           Action:
             - s3:GetObject
             - s3:ListObject
             - s3:PutObject
-            - s3:DeleteObject
           Resource: "arn:aws:s3:::e-core-challenge-passoz-images/*"
   environment:
     IMAGES_TABLE: ${self:custom.tableName}
 
 functions:
   getMetadata:
-    handler: handlers/getMetadata.handler
+    handler: handlers/getMetadata.getMetadata
     events:
       - httpApi:
           method: GET
           path: '/GetMetadata/{filename}'
   infoImages:
-    handler: handlers/infoImages.handler
+    handler: handlers/infoImages.infoImages
     events:
       - httpApi: 
           method: GET
           path: '/InfoImages'
   getImage:
-    handler: handlers/getImage.handler
+    handler: handlers/getImage.getImage
     events:
       - httpApi: 
           method: GET
           path: '/GetImage/{filename}'
   extractMetadata:
-    handler: handlers/extractMetadata.handler
+    handler: handlers/extractMetadata.extractMetadata
     events:
       - s3: 
           bucket: e-core-challenge-passoz-images
@@ -77,18 +79,28 @@ resources:
           - AttributeName: filename
             AttributeType: S
           - AttributeName: size
+            AttributeType: N
+          - AttributeName: extension
             AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
           - AttributeName: filename
             KeyType: RANGE
-        GlobalSecondaryIndexes:
+        LocalSecondaryIndexes:
           - IndexName: SizeIndex
             KeySchema:
               - AttributeName: id
                 KeyType: HASH
               - AttributeName: size
+                KeyType: RANGE
+            Projection:
+              ProjectionType: 'ALL'
+          - IndexName: ExtensionIndex
+            KeySchema:
+              - AttributeName: id
+                KeyType: HASH
+              - AttributeName: extension
                 KeyType: RANGE
             Projection:
               ProjectionType: 'ALL'
