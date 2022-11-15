@@ -23,7 +23,7 @@
     },
     "opts": {
         "encoding": "utf8",
-        "destination": "./documentation/", 
+        "destination": "./docs/", 
         "recurse": true
     }
 }

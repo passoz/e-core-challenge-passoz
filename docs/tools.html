@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: handlers</title>
+    <title>JSDoc: Namespace: tools</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Namespace: handlers</h1>
+    <h1 class="page-title">Namespace: tools</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2>handlers</h2>
+        <h2>tools</h2>
         
     
 </header>
@@ -70,7 +70,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="handlers_getImage.js.html">handlers/getImage.js</a>, <a href="handlers_getImage.js.html#line12">line 12</a>
+        <a href="tools_queries.js.html">tools/queries.js</a>, <a href="tools_queries.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -109,7 +109,7 @@
     
 
     
-    <h4 class="name" id=".extractMetadata"><span class="type-signature">(static) </span>extractMetadata<span class="signature">(event)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".count"><span class="type-signature">(static) </span>count<span class="signature">(table, extension)</span><span class="type-signature"> &rarr; {json}</span></h4>
     
 
     
@@ -117,8 +117,8 @@
 
 
 <div class="description">
-    <p>Function called to extract image metadata when a new image
-is created in a S3 bucket.</p>
+    <p>This function receives a DynamoDB table name and an image
+file extension and returns a query to count images by extension.</p>
 </div>
 
 
@@ -154,145 +154,7 @@ is created in a S3 bucket.</p>
 
         <tr>
             
-                <td class="name"><code>event</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">event</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Event came from S3 trigger.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="handlers_extractMetadata.js.html">handlers/extractMetadata.js</a>, <a href="handlers_extractMetadata.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getImage"><span class="type-signature">(static) </span>getImage<span class="signature">(filename)</span><span class="type-signature"> &rarr; {binary}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Route to proxy an image from S3 bucket when receives an image
-name as path parameter and returns the image file.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>filename</code></td>
+                <td class="name"><code>table</code></td>
             
 
             <td class="type">
@@ -308,7 +170,30 @@ name as path parameter and returns the image file.</p>
 
             
 
-            <td class="description last"><p>Path parameter</p></td>
+            <td class="description last"><p>DynamoDB table name.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>extension</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Image file extension.</p></td>
         </tr>
 
     
@@ -349,7 +234,7 @@ name as path parameter and returns the image file.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="handlers_getImage.js.html">handlers/getImage.js</a>, <a href="handlers_getImage.js.html#line16">line 16</a>
+        <a href="tools_queries.js.html">tools/queries.js</a>, <a href="tools_queries.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
@@ -379,171 +264,7 @@ name as path parameter and returns the image file.</p>
         
 <div class="param-desc">
     <ul>
-<li>Returns the image file.</li>
-</ul>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">binary</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getMetadata"><span class="type-signature">(static) </span>getMetadata<span class="signature">(filename)</span><span class="type-signature"> &rarr; {json}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Route to show image metadata when receives an image
-name as path parameter and returns a JSON with the image
-filename, the image size, the image width and the image
-height.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>filename</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Path parameter</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="handlers_getMetadata.js.html">handlers/getMetadata.js</a>, <a href="handlers_getMetadata.js.html#line13">line 13</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <ul>
-<li>Returns a JSON with the image filename, the image size, the image width and the image height.</li>
+<li>Query to count images by extension.</li>
 </ul>
 </div>
 
@@ -573,7 +294,7 @@ height.</p>
     
 
     
-    <h4 class="name" id=".infoImages"><span class="type-signature">(static) </span>infoImages<span class="signature">(filename)</span><span class="type-signature"> &rarr; {json}</span></h4>
+    <h4 class="name" id="~max"><span class="type-signature">(inner) </span>max<span class="signature">(table)</span><span class="type-signature"> &rarr; {json}</span></h4>
     
 
     
@@ -581,10 +302,8 @@ height.</p>
 
 
 <div class="description">
-    <p>Route to show image metadata when receives an image
-name as path parameter and returns a JSON with the image
-with smaller size, the image with bigger size, an array with
-file types</p>
+    <p>This function receives a DynamoDB table name and
+returns a query to find the image with bigger size.</p>
 </div>
 
 
@@ -620,7 +339,7 @@ file types</p>
 
         <tr>
             
-                <td class="name"><code>filename</code></td>
+                <td class="name"><code>table</code></td>
             
 
             <td class="type">
@@ -636,7 +355,7 @@ file types</p>
 
             
 
-            <td class="description last"><p>Path parameter</p></td>
+            <td class="description last"><p>DynamoDB table name.</p></td>
         </tr>
 
     
@@ -677,7 +396,7 @@ file types</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="handlers_infoImages.js.html">handlers/infoImages.js</a>, <a href="handlers_infoImages.js.html#line14">line 14</a>
+        <a href="tools_queries.js.html">tools/queries.js</a>, <a href="tools_queries.js.html#line5">line 5</a>
     </li></ul></dd>
     
 
@@ -707,7 +426,169 @@ file types</p>
         
 <div class="param-desc">
     <ul>
-<li>Returns a JSON with the image with smaller size, the image with bigger size, an array with file types</li>
+<li>Query to find the image with bigger size.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">json</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~min"><span class="type-signature">(inner) </span>min<span class="signature">(table)</span><span class="type-signature"> &rarr; {json}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>This function receives a DynamoDB table name and
+returns a query to find the image with smaller size.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>table</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>DynamoDB table name.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tools_queries.js.html">tools/queries.js</a>, <a href="tools_queries.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Query to find the image with smaller size.</li>
 </ul>
 </div>
 
@@ -753,7 +634,7 @@ file types</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Nov 14 2022 23:17:40 GMT-0300 (Brasilia Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Nov 14 2022 23:36:56 GMT-0300 (Brasilia Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
